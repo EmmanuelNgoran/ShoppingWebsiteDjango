@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+ {% block listElement %}
+<div class="container">
+    <div class="row">
+
+        {% for ele in products %}
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+            <div class="card">
+                <img class="card-img-top" src="{{ele.image1.url}}" width=200>
+                <div class="card-block">
+                    <div class="meta">
+                        <a href="{% url 'product_details' ele.sub_category.category.gender ele.sub_category.sub_category_name ele.pk %}">{{ele.name}}</a><br/>
+                        {{ele.brand}}
+                    </div>
+                    <div class="card-text">
+                        Rs {{ele.unit_price}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock listElement %}

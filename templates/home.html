@@ -1,0 +1,95 @@
+{% extends "base.html" %} {% load static %} {% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock stylesheet %} {% block content %}
+<nav class="navbar navbar-expand-md bg-light">
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="">
+            </a>
+    <ul class="nav navbar-nav">
+        
+        <li class="dropdown nav-item heading-nav">
+
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                MEN
+            </a>
+            <ul class="dropdown-menu multi-column columns-3">
+                <div class="row">
+                    {% for cat in categories_M %}
+                    <div class="col">
+                        <h4 style="color:#f2c210;">{{cat.category_name}}</h4>
+                        <ul class="multi-column-dropdown">
+                            {% for subCat in cat.categories.all %}
+                            <li>
+                                <a href="{% url 'product_list_c' cat.gender subCat.sub_category_name %}">{{subCat.sub_category_name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </ul>
+        </li>
+        <!-- Women menu -->
+        <li class="dropdown nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                WOMEN
+            </a>
+            <ul class="dropdown-menu multi-column columns-3">
+                <div class="row">
+                    {% for cat in categories_F %}
+                    <div class="col">
+                        <h4 style="color:#f2c210;">{{cat.category_name}}</h4>
+                        <ul class="multi-column-dropdown">
+                            {% for subCat in cat.categories.all %}
+                            <li>
+                                <a href="{% url 'product_list_c' cat.gender subCat.sub_category_name %}">{{subCat.sub_category_name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">CONTACTS US</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">ABOUT</a>
+        </li>
+    </ul>
+    <!-- serach menu-->
+    <div class="col-md-4" style="margin-left:8em;">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <i class="fa fa-search" style="font-size:20px"></i>
+                </button>
+            </span>
+        </div>
+        <!-- /input-group -->
+    </div>
+    <!-- /.col-lg-6 -->
+
+    <div class="accounts" style="display: inline;">
+        <li class="nav-link dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-o" style="font-size:24px"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                {% if user.is_authenticated %}
+                <a class="dropdown-item" href="#">My accounts</a>
+                <a class="dropdown-item" href="#">Change password</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary dropdown-item">Log in</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary ml-2 dropdown-item">Sign up</a>
+                {% endif %}
+            </div>
+        </li>
+    </div>
+
+</nav>
+{% block listElement %} {% endblock listElement %} {% endblock content %}

@@ -1,0 +1,15 @@
+
+button.size{
+    width:50px;
+    height:50px;
+    border-radius:100%;
+    border:solid black 1px;
+    background-color: white;
+    outline:none;
+    
+  }
+ button.size.active{
+    border:solid white 1px;
+    background-color:gray;
+    color:black;
+  }
