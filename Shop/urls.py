@@ -30,6 +30,7 @@ urlpatterns = [
     path('accounts/signup/',accounts_views.signup,name='signup'),
     path('accounts/login/',auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('ajax/add_to_cart/',cart_views.add_to_cart,name='product_to_cart'),
+    path('checkout/cart',cart_views.cart_view,name='cart_view'),
     #TO DO add url 
   # path('shop/<category>/<subCategory>/',views.sub_category,name='sub_category'),  #url to go to category/subCategory/*
   # path('checkout/cart',views.cart,name='cart')#url to go to cart

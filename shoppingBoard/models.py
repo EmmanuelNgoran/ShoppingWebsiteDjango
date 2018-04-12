@@ -66,28 +66,29 @@ class productSpec(models.Model):
 
     SIZE=(
         #size for top cloth
-        ('XS','extra small'),
+      ('TOP CLOTH',(('XS','extra small'),
         ('S','small'),
         ('L','large'),
         ('M','medium'),
-        ('XL','extra large'),
+        ('XL','extra large')))  ,
         #size for bottom cloth
-        ('26','26'),
+        ('BOTTOM CLOTH',( ('26','26'),
         ('28','28'),
         ('30','30'),
         ('32','32'),
         ('34','34'),
-        ('36','36'),
+        ('36','36'))),
+       
 
         #size for shoes
-        ('3','3'),
+      ('SHOES', (('3','3'),
         ('4','4'),
         ('4','4'),
         ('5','5'),
         ('6','6'),
         ('7','7'),
         ('8','8'),
-        ('9','9')
+        ('9','9'))) ,
         
     )
     quantity=models.PositiveIntegerField()
