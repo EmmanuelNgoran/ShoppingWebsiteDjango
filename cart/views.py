@@ -9,7 +9,7 @@ def add_to_cart(request):
     status=True
     cart = Cart(request) 
     product=get_object_or_404(Inventory, id=product_id)
-    cart.add(product=product,size=product_size)
+    cart.add(product=product,size=product_size) 
     #check whether everything is correct
     if product_id==2:
         status=False
