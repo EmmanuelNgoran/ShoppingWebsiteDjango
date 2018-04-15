@@ -22,8 +22,13 @@ class Category(models.Model):
         return "{1}-{0}".format(self.category_name,self.gender)
 
 class SubCategory(models.Model):
+
+    PRODUCT_TYPE=('shoes','bottom','top')
+
+
     sub_category_name=models.CharField(max_length=30)
     category=models.ForeignKey(Category,related_name='categories', on_delete=models.CASCADE)
+    product_type=models.CharField(choices=PRODUCT_TYPE , max_length="8")
     def __str__(self):
         return "{} {}".format(self.sub_category_name,self.category.gender)
     
@@ -64,39 +69,39 @@ class Inventory(models.Model):
     
 class productSpec(models.Model):
 
-    SIZE=(
-        #size for top cloth
-      ('TOP CLOTH',(('XS','extra small'),
+    SIZE_TOP_CLOTH=('TOP CLOTH',(('XS','extra small'),
         ('S','small'),
         ('L','large'),
         ('M','medium'),
-        ('XL','extra large')))  ,
-        #size for bottom cloth
-        ('BOTTOM CLOTH',( ('26','26'),
+        ('XL','extra large')))
+
+    SIZE_BOTTOM_CLOTH= ('BOTTOM CLOTH',( ('26','26'),
         ('28','28'),
         ('30','30'),
         ('32','32'),
         ('34','34'),
-        ('36','36'))),
-       
+        ('36','36')))
 
-        #size for shoes
-      ('SHOES', (('3','3'),
+    SIZE_SHOES= ('SHOES', (('3','3'),
         ('4','4'),
         ('4','4'),
         ('5','5'),
         ('6','6'),
         ('7','7'),
         ('8','8'),
-        ('9','9'))) ,
-        
-    )
+        ('9','9'))) 
+    
+    SIZE=(SIZE_BOTTOM_CLOTH,SIZE_SHOES,SIZE_TOP_CLOTH)
+
+    
+
     quantity=models.PositiveIntegerField()
     size=models.CharField( max_length=2,
         choices=SIZE,
         )
     product=models.ForeignKey(Inventory,related_name='product_spec',on_delete=models.CASCADE)
     color=models.CharField(max_length=10)
+   
 
     def productName(self):
         return "{}".format(self.product.name)

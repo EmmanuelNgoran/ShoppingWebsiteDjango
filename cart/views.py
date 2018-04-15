@@ -27,11 +27,9 @@ def cart_remove(request, product_id):
     cart.remove(product)    
     return redirect('cart:cart_detail')#to do create the cart html change
 
-def cart_detail(request):    
-    cart = Cart(request)    
-    return render(request, 'cart/detail.html', {'cart': cart})
 
 def cart_view(request):
-    return render(request,'cart/view_cart.html')
+    cart = Cart(request)   
+    return render(request,'cart/view_cart.html',{'cart':cart})
 
 # Create your views here.
