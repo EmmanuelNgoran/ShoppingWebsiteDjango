@@ -22,11 +22,11 @@ def add_to_cart(request):
 
     return JsonResponse(data)
 
-def cart_remove(request, product_id):    
+def  cart_remove(request,product_id):    
     cart = Cart(request)    
     product = get_object_or_404(Inventory, id=product_id)    
     cart.remove(product)    
-    return redirect('cart/view_cart_detail')#to do create the cart html change
+    return redirect('cart_view')#to do create the cart html change
 
 
 def cart_view(request):

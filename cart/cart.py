@@ -15,6 +15,7 @@ class Cart(object):
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+       
 #TO DO : change the function to support no quantity
     def __len__(self):
         """
@@ -27,15 +28,21 @@ class Cart(object):
         Iterate over the items in the cart and get the products from the database.
         """
         product_ids = self.cart.keys()
-        # get the product objects and add them to the cart
+        print(product_ids)
+        print(self.cart)
+        #get the product objects and add them to the cart
         products = Inventory.objects.filter(id__in=product_ids)
+        print(products)
         for product in products:
             self.cart[str(product.id)]['product'] = product
-
-        for item in self.cart.values():
-            item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
-            yield item
+        print(" the value of the product dictionnary {}".format(self.cart))
+        # for item in self.cart.values():
+        #     item['price'] = Decimal(item['price'])
+        #     item['total_price'] = item['price'] * item['quantity']
+        #     print('cart items are {}'.format(item))
+        #     yield item
+        for key in self.cart.keys():
+            yield self.cart[key]['product']
 
     def add(self, product, quantity=1,size='S',update_quantity=False,update_size=False):
         """
@@ -46,7 +53,7 @@ class Cart(object):
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 1,
                                       'price': str(product.unit_price),'size':size}
-        if update_quantity:
+        if not update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
