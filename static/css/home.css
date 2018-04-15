@@ -7,9 +7,10 @@
 	border-radius: 0;
 	box-shadow: rgba(1, 1, 1, 0.3) 1px 2px 12px;
 }
-.navbar li>a {
-	color: rgba(0, 0, 0, 0.5) !important;
+.navbar>li>a {
+	color: rgba(1, 0, 0, 0.5) !important;
 	font-weight:bold !important;
+	border-bottom: 3px solid transparent;
 	
 }
 .navbar li a:hover{

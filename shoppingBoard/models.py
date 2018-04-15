@@ -23,12 +23,12 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
 
-    PRODUCT_TYPE=('shoes','bottom','top')
+    PRODUCT_TYPE=(('shoes','shoes'),('bottom','bottom'),('top','top'))
 
 
     sub_category_name=models.CharField(max_length=30)
     category=models.ForeignKey(Category,related_name='categories', on_delete=models.CASCADE)
-    product_type=models.CharField(choices=PRODUCT_TYPE , max_length="8")
+   # product_type=models.CharField(choices=PRODUCT_TYPE , max_length=8)
     def __str__(self):
         return "{} {}".format(self.sub_category_name,self.category.gender)
     

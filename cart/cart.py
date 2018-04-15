@@ -37,7 +37,7 @@ class Cart(object):
             item['total_price'] = item['price'] * item['quantity']
             yield item
 
-    def add(self, product, quantity=1,size='S',update_quantity=False):
+    def add(self, product, quantity=1,size='S',update_quantity=False,update_size=False):
         """
         Add a product to the cart or update its quantity.
         """
@@ -48,9 +48,11 @@ class Cart(object):
                                       'price': str(product.unit_price),'size':size}
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
-            self.cart[product_id]['size']=size
         else:
             self.cart[product_id]['quantity'] += quantity
+        if update_size:
+            self.cart[product_id]['size']=size
+        
         self.save()
 
     def remove(self, product):

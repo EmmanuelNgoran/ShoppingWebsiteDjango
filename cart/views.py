@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from .cart import Cart 
 #write try catch to catch wong data coming from the client
 def add_to_cart(request):
+    #add security system to the check the query to avoid csrf
     product_size = request.GET.get('size', None)
     product_id=request.GET.get('product_id',None)
     status=True
@@ -25,7 +26,7 @@ def cart_remove(request, product_id):
     cart = Cart(request)    
     product = get_object_or_404(Inventory, id=product_id)    
     cart.remove(product)    
-    return redirect('cart:cart_detail')#to do create the cart html change
+    return redirect('cart/view_cart_detail')#to do create the cart html change
 
 
 def cart_view(request):

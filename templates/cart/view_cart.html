@@ -46,31 +46,35 @@
   </head>
   <body>
     <div class='container' style="margin-top:10px;">
-      <div class="row box-shadow">
-    <div class="col-md-3">
-      <img class="image"src="https://assets.myntassets.com/h_128,q_100,w_96/v1/assets/images/1673725/2018/2/16/11518766944851-Roadster-Men-Navy-Striped-Round-Neck-T-shirt-4281518766944542-1.jpg" alt="">
+    {% for items in cart %}
+    {% with product=item.product %}
+    <div class="row box-shadow">
+        <div class="col-md-3">
+          <img class="image"src="{{product.image1.url}}" alt="">
+            </div>
+         <div class="col">
+           <span id="name">{{product.name}}</span>
+       <span id="price"> Rs {{product.unit_price}}</span>
+           <p>Sold by {{product.brand}}</p>
+           <div class="inline-form">
+             SIZE: <select>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+            </select>
+           </div>
+           <div class="divider"></div>
+           <div class="bottom">
+             <a href="#"><a/>
+           </div>
+           
+            </div>
+            
         </div>
-     <div class="col">
-       <span id="name">Roadster Men Navy Blue & White Striped Round Nec</span>
-   <span id="price">Rs. 699</span>
-       <p>Sold by WandWagon</p>
-       <div class="inline-form">
-         SIZE: <select>
-    <option value="S">S</option>
-    <option value="M">M</option>
-    <option value="XL">XL</option>
-    <option value="XXL">XXL</option>
-        </select>
-       </div>
-       <div class="divider"></div>
-       <div class="bottom">
-         <a href="#">REMOVE<a/>
-         <a href="#">MOVE TO WISHLIST<a/>
-       </div>
-       
-        </div>
-        
-    </div>
+        {% endwith %}
+    {% endfor %}
+     
     </div>
   
   </body>
