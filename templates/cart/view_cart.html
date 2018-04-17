@@ -1,125 +1,112 @@
-<!DOCTYPE html>
+{% extends "home.html" %}
 {% load thumbnail %}
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
 
-    <title>Checkout example for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
     <!-- Custom styles for this template -->
-    <style>
+{% block stylesheet %}
+<style>
         
-        
-        .border-top { border-top: 1px solid #e5e5e5; }
-        .border-bottom { border-bottom: 1px solid #e5e5e5; }
-        .border-top-gray { border-top-color: #adb5bd; }
-        
-        .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
-        
-        .lh-condensed { line-height: 1.25; }
-        
+    #page-content{
+      padding-top:12px;
+    }  
+    .border-top { border-top: 1px solid #e5e5e5; }
+    .border-bottom { border-bottom: 1px solid #e5e5e5; }
+    .border-top-gray { border-top-color: #adb5bd; }
     
-      </style>
-  </head>
+    .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+    
+    .lh-condensed { line-height: 1.25; }
+    
 
-  <body class="bg-light">
-
-    <div class="container">
-{% if cart|length > 0 %}
-
-
-      <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">{{cart|length}}</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Bag Total</h6>
-              </div>
-              <span class="text-muted"> Rs {{cart.get_total_price}}</span>
-             
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Estimated Tax</h6>
-              </div>
-              <span class="text-muted">Rs 18</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0"><strong>Total Payable</strong></h6>
-              </div>
-              <span class="text-muted"> Rs {{cart.get_total_price|add:"18"}}</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-
-          <button  class="btn btn-primary justify-content-center">Place Order</button>
-        </div>
-        <div class="col-md-8 order-md-1"><!--Todo-->
-          {% for element in cart %}
-          {% with product=element.product %}
-          
-         
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-              {% thumbnail product.image1 "200" as im %}
-                    <img class="card-img-left flex-auto d-none d-lg-block" src="{{im.url}}" width=200>
-                {% endthumbnail %}  
-            
-            <div class="card-body d-flex flex-column align-items-start">
-              
-              <h3 class="mb-0">
-                <span class="name text-dark">{{product.name}}</span>
-              </h3>
-              <div class="mb-1 text-muted">
-                <span class="price"> Rs {{element.total_price}}</span>
-              </div>
-              
-              <a href="{% url 'remove_cart_item' product.id %}">REMOVE
-                  <a/>
-            </div>
-            <!-- bbbbbbbbbbbb-->
-          </div>
-          {% endwith %}
-          {% endfor %}
-        </div>
+  </style>
+{% endblock stylesheet %}
+{% block listElement %}
+  <div class="container" id="page-content">
+      {% if cart|length > 0 %}
       
-      </div>
+      
+            <div class="row">
+              <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="text-muted">Your cart</span>
+                  <span class="badge badge-secondary badge-pill">{{cart|length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                  <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                      <h6 class="my-0">Bag Total</h6>
+                    </div>
+                    <span class="text-muted"> Rs {{cart.get_total_price}}</span>
+                   
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                      <h6 class="my-0">Estimated Tax</h6>
+                    </div>
+                    <span class="text-muted">Rs 18</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                      <h6 class="my-0"><strong>Total Payable</strong></h6>
+                    </div>
+                    <span class="text-muted"> Rs {{cart.get_total_price|add:"18"}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                      <h6 class="my-0">Promo code</h6>
+                      <small>EXAMPLECODE</small>
+                    </div>
+                    <span class="text-success">-$5</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (USD)</span>
+                    <strong>$20</strong>
+                  </li>
+                </ul>
+      
+                <button  class="btn btn-primary justify-content-center">Place Order</button>
+              </div>
+              <div class="col-md-8 order-md-1"><!--Todo-->
+                {% for element in cart %}
+                {% with product=element.product %}
+                
+               
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                    {% thumbnail product.image1 "200" as im %}
+                          <img class="card-img-left flex-auto d-none d-lg-block" src="{{im.url}}" width=200>
+                      {% endthumbnail %}  
+                  
+                  <div class="card-body d-flex flex-column align-items-start">
+                    
+                    <h3 class="mb-0">
+                      <span class="name text-dark">{{product.name}}</span>
+                    </h3>
+                    <div class="mb-1 text-muted">
+                      <span class="price"> Rs {{element.total_price}}</span>
+                    </div>
+                    
+                    <a href="{% url 'remove_cart_item' product.id %}">REMOVE
+                        <a/>
+                  </div>
+                  <!-- bbbbbbbbbbbb-->
+                </div>
+                {% endwith %}
+                {% endfor %}
+              </div>
+            
+            </div>
+      
+            {% else %}
+            <h2 style="text-align: center">Your cart is empty</h2>
+            {% endif %}
+          </div>
 
-      {% else %}
-      <h2 style="text-align: center">Your cart is empty</h2>
-      {% endif %}
-    </div>
+{% endblock listElement %}
+   
+
+  
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
   
 
-</body></html>

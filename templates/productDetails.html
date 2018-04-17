@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="{% static 'css/detail_product.css' %}">
 {% endblock stylesheet %}
  {% block listElement %}
-<div class="container">
-		<div class="card border-primary mb-3">
+<div class="container" style="padding-top: 10px;>
+		<div class="card border-primary mb-3" >
 			<div class="container-fliud">
 				<div class="wrapper row">
 					<div class="preview col-md-6">
@@ -18,7 +18,7 @@
 						  <div class="tab-pane" id="pic-3"><img src="{{product.image3.url}}" width="500" /></div>
 						</div>
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{product.image2.url}}" width=50 /></a></li>
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{product.image1.url}}" width=50 /></a></li>
 						  <li><a data-target="#pic-2" data-toggle="tab"><img src="{{product.image2.url}}" width=50 /></a></li>
 						  <li><a data-target="#pic-3" data-toggle="tab"><img src="{{product.image3.url}}" width="50"/></a></li>
 						</ul>

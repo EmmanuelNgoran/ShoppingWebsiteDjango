@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% load static %} {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock stylesheet %} {% block content %}
-<nav class="navbar navbar-expand-md bg-light">
+<nav class="navbar navbar-expand-md " style="background: #FFF;">
 
         <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'images/logo.png' %}" alt="">
@@ -91,13 +91,15 @@
         </li>
         
     </div>
-    <div class="cart">
+    <div class="cart" style="position: relative;">
         <a class="go-cart" href="{% url 'cart_view' %}">
             <i class="fa fa-shopping-cart" style="font-size: 24px; color:black;"></i>
         </a>
-        <div style="width:18px; height:18px; border-radius:10%; background: rgb(230, 78, 78); top:-18px ; left:10px; position:relative;">
-            2
-        </div>
+        {% if cart|length > 0 %}
+        <div style="width:18px;height:18px;border-radius: 100%;background: rgb(253, 169, 83);top: -13px;left: 15px;position:absolute; text-align:center;line-height: 1">
+                {{cart|length}}
+            </div>
+        {% endif %}
     </div>
     
 
