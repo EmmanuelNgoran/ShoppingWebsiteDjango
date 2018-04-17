@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'shoppingBoard',
     'accounts',
     'widget_tweaks',
-    'cart'
+    'cart',
+    'sorl.thumbnail'
 ]
 
 MIDDLEWARE = [
