@@ -1,17 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'home.html' %}
 
 {% load static %}
 
 {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
-{% endblock %}
+{% endblock stylesheet %}
 
-{% block body %}
+{% block listElement %}
   <div class="container">
     <h1 class="text-center logo my-4">
-      <a href="{% url 'home' %}">Django Boards</a>
+      <a href="{% url 'home' %}">WELCOME TO EMPOROS</a>
     </h1>
-    {% block content %}
-    {% endblock %}
+    {% block formContent %}
+    {% endblock formContent %}
   </div>
-{% endblock %}
+{% endblock listElement %}

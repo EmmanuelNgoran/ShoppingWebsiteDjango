@@ -66,6 +66,9 @@
                 <button  class="btn btn-primary justify-content-center">Place Order</button>
               </div>
               <div class="col-md-8 order-md-1"><!--Todo-->
+                
+                
+                
                 {% for element in cart %}
                 {% with product=element.product %}
                 
@@ -92,7 +95,6 @@
                 {% endwith %}
                 {% endfor %}
               </div>
-            
             </div>
       
             {% else %}

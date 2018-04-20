@@ -29,11 +29,13 @@ urlpatterns = [
     path('shop/<gender>/<category_name>/<pk>', views.productDetails, name='product_details'),
     path('accounts/signup/',accounts_views.signup,name='signup'),
     path('accounts/login/',auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
    # path('logout/','django.contrib.auth.views.logout',name='logout'),
     path('ajax/add_to_cart/',cart_views.add_to_cart,name='product_to_cart'), #add a product to the cart
     path('checkout/cart',cart_views.cart_view,name='cart_view'), # cart details
-    path('checkout/cart/remove/<product_id>',cart_views.cart_remove,name='remove_cart_item'), #remove a product from the cart
-
+    path('checkout/cart/remove/<product_id>',cart_views.cart_remove,name='remove_cart_item'),
+    path('checkout/confirming',accounts_views.place_order,name='order') #remove a product from the cart
+    
     #TO DO add url 
   # path('shop/<category>/<subCategory>/',views.sub_category,name='sub_category'),  #url to go to category/subCategory/*
   # path('checkout/cart',views.cart,name='cart')#url to go to cart

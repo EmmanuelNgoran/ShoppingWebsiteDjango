@@ -16,7 +16,6 @@ def add_to_cart(request):
         status=False
     data = {
         'ok':status,
-
         #Inventory.objects.filter(username__iexact=username).exists()
     }
 

@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 class SignUpForm(UserCreationForm):
     email = forms.CharField(max_length=254, required=True, widget=forms.EmailInput())
-    phoneNumber=forms.IntegerField( help_text='ex: 5555555555', widget=forms.TextInput(attrs={ 'max_length': 10, 'required': True, } ), )
+    # phoneNumber=forms.IntegerField( help_text='ex: 5555555555', widget=forms.TextInput(attrs={ 'max_length': 10, 'required': True, } ), )
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2','phoneNumber',)
+        fields = ('username', 'email', 'password1', 'password2')
+
+# class UserData
