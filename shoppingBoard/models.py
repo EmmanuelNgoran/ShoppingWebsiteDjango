@@ -116,7 +116,7 @@ class productSpec(models.Model):
     product.short_description='Product name'
 
 class UserData(models.Model):
-    address=models.CharField(max_length=300)
+    address=models.TextField(max_length=300)
     phone_number=models.PositiveIntegerField()
     user=models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
 
@@ -124,8 +124,8 @@ class Order(models.Model):
     order_by=models.ForeignKey(UserData,related_name="customer",on_delete=models.CASCADE)
     paid = models.BooleanField(default=False)
 
-class OrderedItems(models.Model):
-    order=models.ForeignKey(Order,related_name='from_order',default='product',on_delete=models.CASCADE)
+class OrderItems(models.Model):
+    order=models.ForeignKey(Order,related_name='from_order',on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField()
     ship_date=models.DateField(null=True)
     product=models.ForeignKey(Inventory,related_name='products',on_delete=models.CASCADE)
