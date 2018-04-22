@@ -3,7 +3,7 @@ from django.contrib.auth import login as auth_login
 from .form import SignUpForm ,UserDataForm
 from django.contrib.auth.models import User
 from cart.cart import Cart
-from shoppingBoard.models import UserData , Order , OrderItems
+from shoppingBoard.models import UserData , Orders , OrderItems
 import datetime
 import random
 
@@ -28,17 +28,20 @@ def place_order(request):
         form = UserDataForm(request.POST)
         user=User.objects.first()
         if form.is_valid():
+            print("loop")
             userdata=form.save()
-            order=Order.objects.create(order_by=userdata)
+            order=Orders.objects.create(customer=userdata)
             order.save()
             delivery_date=datetime.date.today()+datetime.timedelta(random.randrange(MIN_DATE,MAX_DATE,1))
             for item in cart:
-                OrderItems.objects.create(order=order,
+                items=OrderItems.objects.create(order=order,
                 product=item['product'],
                 price=item['price'],
                 quantity=item['quantity'],size=item['size'],
                 shipping_charge=CHARGE,
-                shipping_date=delivery_date)
+                ship_date=delivery_date)
+                items.save()
+                
 # clear the cart
             cart.clear()
         return redirect('home')

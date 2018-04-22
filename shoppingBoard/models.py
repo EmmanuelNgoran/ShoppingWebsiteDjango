@@ -120,12 +120,12 @@ class UserData(models.Model):
     phone_number=models.PositiveIntegerField()
     user=models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
 
-class Order(models.Model):
-    order_by=models.ForeignKey(UserData,related_name="customer",on_delete=models.CASCADE)
+class Orders(models.Model):
+    customer=models.ForeignKey(UserData,related_name="customer",on_delete=models.CASCADE,null=True)
     paid = models.BooleanField(default=False)
 
 class OrderItems(models.Model):
-    order=models.ForeignKey(Order,related_name='from_order',on_delete=models.CASCADE)
+    order=models.ForeignKey(Orders,related_name='from_order',on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField()
     ship_date=models.DateField(null=True)
     product=models.ForeignKey(Inventory,related_name='products',on_delete=models.CASCADE)
@@ -133,8 +133,8 @@ class OrderItems(models.Model):
     price=models.PositiveIntegerField(default=1)
     size=models.CharField(max_length=2,null=True)
 
-    def __str__(self):
-        return "order by {} and shipped on {}".format(self.order.order_by.username,self.ship_date)
+    # def __str__(self):
+    #     return "order by {} and shipped on {}".format(self.order.customer.user.username,self.ship_date)
 
 
    

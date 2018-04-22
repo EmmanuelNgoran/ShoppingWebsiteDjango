@@ -76,7 +76,7 @@
         <li class="nav-link dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% if user.is_authenticated %}
-                    {{user.phoner_number}}
+                    {{user.username}}
                     {% else %}
                     <i class="fa fa-user-o" style="font-size:24px"></i>
                     {% endif %}

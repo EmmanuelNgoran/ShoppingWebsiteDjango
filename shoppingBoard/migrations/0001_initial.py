@@ -14,20 +14,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Bag',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='BagItems',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.IntegerField()),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
+        
         migrations.CreateModel(
             name='Category',
             fields=[
@@ -54,18 +41,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='OrderedItems',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.IntegerField()),
-                ('ship_date', models.DateField(null=True)),
-                ('shipping_charge', models.IntegerField()),
-                ('price', models.IntegerField()),
-                ('order_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customer', to=settings.AUTH_USER_MODEL)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='shoppingBoard.Inventory')),
-            ],
-        ),
-        migrations.CreateModel(
             name='SubCategory',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -78,14 +53,5 @@ class Migration(migrations.Migration):
             name='sub_category',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shoppingBoard.SubCategory'),
         ),
-        migrations.AddField(
-            model_name='bag',
-            name='bag_items',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bagItems', to='shoppingBoard.BagItems'),
-        ),
-        migrations.AddField(
-            model_name='bag',
-            name='bag_of',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bagOwner', to=settings.AUTH_USER_MODEL),
-        ),
+
     ]

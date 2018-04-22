@@ -63,21 +63,7 @@ class Migration(migrations.Migration):
             name='unit_price',
             field=models.PositiveIntegerField(),
         ),
-        migrations.AlterField(
-            model_name='ordereditems',
-            name='price',
-            field=models.PositiveIntegerField(),
-        ),
-        migrations.AlterField(
-            model_name='ordereditems',
-            name='quantity',
-            field=models.PositiveIntegerField(),
-        ),
-        migrations.AlterField(
-            model_name='ordereditems',
-            name='shipping_charge',
-            field=models.PositiveIntegerField(),
-        ),
+       
         migrations.AlterField(
             model_name='subcategory',
             name='category',
