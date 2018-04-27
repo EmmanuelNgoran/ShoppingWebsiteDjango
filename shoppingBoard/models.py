@@ -120,9 +120,14 @@ class UserData(models.Model):
     phone_number=models.PositiveIntegerField()
     user=models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user
+
 class Orders(models.Model):
     customer=models.ForeignKey(UserData,related_name="customer",on_delete=models.CASCADE,null=True)
     paid = models.BooleanField(default=False)
+    def __str__(self):
+        return "order {}".format(self.id)
 
 class OrderItems(models.Model):
     order=models.ForeignKey(Orders,related_name='from_order',on_delete=models.CASCADE)
@@ -135,7 +140,14 @@ class OrderItems(models.Model):
 
     # def __str__(self):
     #     return "order by {} and shipped on {}".format(self.order.customer.user.username,self.ship_date)
+    def get_photo(self):
+        return mark_safe('<a href="{0}"><img src="{0}" width="150" /></a>'.format(self.product.image1.url ))
+    get_photo.short_description = "Preview"
+    get_photo.allow_tags = True
 
+    def get_user_name(self):
+        return self.order.customer.user
+    get_user_name.short_description = "customer_name"
 
    
 #user data can belong to only one user

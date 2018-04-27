@@ -6,6 +6,8 @@ from cart.cart import Cart
 from shoppingBoard.models import UserData , Orders , OrderItems
 import datetime
 import random
+from django.contrib.auth.decorators import login_required
+
 
 MIN_DATE=2
 MAX_DATE=8
@@ -22,14 +24,21 @@ def signup(request):
         form =SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+@login_required
 def place_order(request):
     cart = Cart(request)
     if request.method == 'POST':
+        userdata=""
         form = UserDataForm(request.POST)
-        user=User.objects.first()
+        user=request.user
+        print(user.username)
         if form.is_valid():
-            print("loop")
-            userdata=form.save()
+            ################
+            userdata=UserData.objects.get(user=user)
+            if userdata==0:
+                userdata=form.save(commit=False)
+                userdata.user=user
+                userdata.save()
             order=Orders.objects.create(customer=userdata)
             order.save()
             delivery_date=datetime.date.today()+datetime.timedelta(random.randrange(MIN_DATE,MAX_DATE,1))
