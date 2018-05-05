@@ -115,22 +115,22 @@ class productSpec(models.Model):
         return "{}".format(self.product.name)
     product.short_description='Product name'
 
-class UserData(models.Model):
+
+class Order(models.Model):
     address=models.TextField(max_length=300)
     phone_number=models.PositiveIntegerField()
-    user=models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user
-
-class Orders(models.Model):
-    customer=models.ForeignKey(UserData,related_name="customer",on_delete=models.CASCADE,null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     paid = models.BooleanField(default=False)
+    def productName(self):
+        return "{}".format(self.user.username)
+    user.short_description='customer name'
+
     def __str__(self):
-        return "order {}".format(self.id)
+        return self.user.username
 
 class OrderItems(models.Model):
-    order=models.ForeignKey(Orders,related_name='from_order',on_delete=models.CASCADE)
+    order=models.ForeignKey(Order,related_name='from_order',on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField()
     ship_date=models.DateField(null=True)
     product=models.ForeignKey(Inventory,related_name='products',on_delete=models.CASCADE)
@@ -138,16 +138,15 @@ class OrderItems(models.Model):
     price=models.PositiveIntegerField(default=1)
     size=models.CharField(max_length=2,null=True)
 
-    # def __str__(self):
-    #     return "order by {} and shipped on {}".format(self.order.customer.user.username,self.ship_date)
+    class Meta:
+        verbose_name_plural = 'Items Ordered'
+
+    def __str__(self):
+        return "order by {} and shipped on {}".format(self.order.user.username,self.ship_date)
     def get_photo(self):
         return mark_safe('<a href="{0}"><img src="{0}" width="150" /></a>'.format(self.product.image1.url ))
     get_photo.short_description = "Preview"
     get_photo.allow_tags = True
-
-    def get_user_name(self):
-        return self.order.customer.user
-    get_user_name.short_description = "customer_name"
 
    
 #user data can belong to only one user
